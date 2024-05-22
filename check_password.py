@@ -16,7 +16,6 @@ def get_leak_count(hashes,hashes_to_check):
     for h, count in recived_hash:
         # spliting hash and count recived from the api
         if h == hashes_to_check:
-
             return count
 def pwned_api_check(password):
     #hashing the password
