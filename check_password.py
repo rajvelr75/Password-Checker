@@ -1,15 +1,14 @@
 import requests
 import hashlib
-import sys 
 
 
 def req_api_data(query_char):
     url = 'https://api.pwnedpasswords.com/range/' + query_char
     res = requests.get(url)
     if res.status_code != 200:
-        raise RuntimeError(f"Error {res.status_code}")
-    else:
-        return res
+        raise RuntimeError(
+            f"Error fetching {res.status_code} check API and try again.")
+    return res
 
 def get_leak_count(hashes,hashes_to_check):
     # Received response from the API will be in a list[remaining characters that needed to be checked : count of times the hash found]
@@ -32,6 +31,8 @@ def pwned_api_check(password):
     #receiving response and getting count
     return get_leak_count(response,tail)
 
-
+def main(password):
+    count = pwned_api_check(password)
+    return count 
 
 
